@@ -16,6 +16,24 @@
     </section>
 
     <!-- Main content -->
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (Session::has('success'))
+        <div class="alert alert-info alert-dismissable">
+            <i class="fa fa-info"></i>
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+            <b>Alert!</b> {{ Session::get('success') }}.
+        </div>
+    @endif
+
     <section class="content">
         <!-- Small boxes (Stat box) -->
         <div class="col col-md-2"></div>

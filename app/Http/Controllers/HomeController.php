@@ -55,26 +55,26 @@ class HomeController extends Controller
 
 
         if($validator->passes()){
-            $file->move(public_path('product_images'), $file->getClientOriginalName());
+
+            $file->move(public_path('product_images'), "assets/img/uproar.jpg");
+//            $file->getClientOriginalName()
+            $product->product_id = "PRO-" . rand(000, 999);
+            $product->product_name = $request->input('pro_name');
+            $product->product_desc = $request->input('pro_desc');
+            $product->product_price = $request->input('pro_price');
+            $product->product_image = "assets/img/uproar.jpg";
+            $product->product_category = $request->input('pro_cat');
+            $product->product_brand = $request->input('pro_brand');
+            $product->created_at = Carbon::now();
+            $product->updated_at = Carbon::now();
+
+            $product->save();
+            Session::flash('success', 'Product Saved Successfully');
+            return redirect('product-add');
 
         }else{
             return redirect('product-add')->withErrors($validator)->withInput();
         }
-
-
-        $product->product_id = "PRO-" . rand(000, 999);
-        $product->product_name = $request->input('pro_name');
-        $product->product_desc = $request->input('pro_desc');
-        $product->product_price = $request->input('pro_price');
-        $product->product_image = "assets/img/uproar.jpg";
-        $product->product_category = $request->input('pro_cat');
-        $product->product_brand = $request->input('pro_brand');
-        $product->created_at = Carbon::now();
-        $product->updated_at = Carbon::now();
-
-        $product->save();
-
-
     }
 
     public function add_product_category()
