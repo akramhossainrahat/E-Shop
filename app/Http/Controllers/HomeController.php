@@ -93,6 +93,8 @@ class HomeController extends Controller
             $category-> created_at  = Carbon::now();
             $category-> updated_at = Carbon::now();
 
+            Session::flash('success', 'Category Saved Successfully');
+            
             $category->save();
 
             return redirect('add-product-category');
