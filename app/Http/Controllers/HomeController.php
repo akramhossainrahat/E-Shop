@@ -72,11 +72,12 @@ class HomeController extends Controller
     public function save_product_category(Request $request)
     {
         $rules = array(
-            'category_name' => 'required'
+            'category_name' => 'required|unique:categories, category_name|max:255'
             );
 
             $messages = array(
-                'category_name . required' => 'Category Name is required & should be unique . ',
+                'category_name.required' => 'Category Name is Required & Should be Unique.'
+//                'category_name.unique' => 'Category Name Should be Unique.'
             );
 
             $validator = Validator::make($request->all(), $rules, $messages);
