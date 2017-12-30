@@ -30,7 +30,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form class="form-horizontal" action="{{URL::to('add-new-product')}}" method="post">
+                    <form class="form-horizontal" action="{{URL::to('add-new-product')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
                         <div class="box-body">
                             <div class="form-group">
@@ -38,11 +38,9 @@
                                 <div class="col-sm-10">
                                     <select class="form-control" name="pro_cat">
                                         <option selected>Select a category</option>
-                                        <option value="Mens">Mens</option>
-                                        <option value="Ladies">Ladies</option>
-                                        <option value="Kids">Kids</option>
-                                        <option value="Jwelary">Jwelary</option>
-                                        <option value="Accessories">Accessories</option>
+                                        @foreach($cat_lists as $cats)
+                                        <option value="{{$cats->category_id}}">{{$cats->category_name}}</option>
+                                            @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -79,12 +77,12 @@
                                            type="number" name="pro_price">
                                 </div>
                             </div>
-                            {{--<div class="form-group">
-                                <label for="exampleInputFile" class="col-sm-2 control-label">File input</label>
+                            <div class="form-group">
+                                <label for="exampleInputFile" class="col-sm-2 control-label">Product Image</label>
                                 <div class="col-sm-10">
-                                    <input id="exampleInputFile" type="file">
+                                    <input id="exampleInputFile" type="file" name="image">
                                 </div>
-                            </div>--}}
+                            </div>
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
